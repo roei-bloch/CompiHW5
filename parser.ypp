@@ -1,0 +1,137 @@
+%{
+    #include "hw3_output.hpp"
+    #include "gorila.h"
+    #include "symbol_table_dinosaur.h"
+    #include "bp.hpp"
+    int yylex();
+    void yyerror(const char *err_msg);
+    extern int yylineno;
+    Trex *trex;
+    CodeBuffer code_buffer;
+    extern int global_while_ctr;
+    codeGen_chan *codegen_chan;
+    #pragma GCC diagnostic ignored "-Wfree-nonheap-object"
+%}
+
+%nonassoc NUM
+%token ID
+%token STRING
+%token INT
+%token BYTE
+%nonassoc B
+%token BOOL
+%left OR
+%left AND
+%token TRUE
+%token FALSE
+%token RETURN
+%token IF
+%token WHILE
+%token BREAK
+%token CONTINUE
+%token SC
+%right ASSIGN
+%left EQU
+%left BLE
+%nonassoc BINOP
+%left PLUS_MINUS
+%left MULT_DIVIDE
+%right NOT
+%left LBRACE
+%left RBRACE
+%left LPAREN
+%left RPAREN
+%right ELSE
+
+
+
+
+
+%%
+
+
+Program : Statements {}
+Statements : Statement {}
+            | Statements Statement {}
+Statement   : LBRACE OPEN_SCOPE Statements RBRACE {remove_scope();} 
+            | Type ID SC {add_symbol($1, $2);}
+            | Type ID ASSIGN Exp SC {add_symbol($1, $2, $4);}
+            | ID ASSIGN Exp SC {assign_symbol($1, $3);}
+            | Call SC {$$ = $1;}
+            | RETURN SC {}
+            | IF LPAREN CHECK_EXP RPAREN OPEN_SCOPE Statement CLOSE_SCOPE {}
+            | IF LPAREN CHECK_EXP RPAREN OPEN_SCOPE Statement CLOSE_SCOPE ELSE OPEN_SCOPE Statement {remove_scope();}
+            | WHILE LPAREN CHECK_EXP RPAREN OPEN_SCOPE {global_while_ctr++;} Statement {global_while_ctr--; remove_scope();} 
+            | BREAK SC {if(!global_while_ctr)
+	    {
+		output::errorUnexpectedBreak(yylineno);
+		exit(0);
+	    }}
+            | CONTINUE SC {if(!global_while_ctr)
+	    {
+		output::errorUnexpectedContinue(yylineno);
+		exit(0);
+	    }}
+Call : ID LPAREN Exp RPAREN {Node* returned_val = call_function($1, $3);
+                             if(returned_val != NULL){
+                                $$ = new NUM_CLASS(returned_val);}
+                                else {
+                                    $$ = new Node ("", "VOID");
+                                }}
+Type : INT {$$ = new Type_CLASS($1, "INT");}
+      | BYTE {$$ = new Type_CLASS($1, "BYTE");}
+      | BOOL {$$ = new Type_CLASS($1, "BOOL");}
+Exp : LPAREN Exp RPAREN {$$ = $2;}
+     | Exp MULT_DIVIDE Exp {Node *result = plus_minus_mult_divide($1, $2, $3);
+                           if(result->type == "INT"){
+                                $$ = new NUM_CLASS(result);
+                           } else {
+                                $$ = new NUMB(result);
+                           }}
+     | Exp PLUS_MINUS Exp {Node *result = plus_minus_mult_divide($1, $2, $3);
+                           if(result->type == "INT"){
+                                $$ = new NUM_CLASS(result);
+                           } else {
+                                $$ = new NUMB(result);
+                           }}
+     | ID {$$ = search_and_return_id($1);} // search in scopes and update type
+     | Call {$$ = $1;}
+     | NUM {$$ = new NUM_CLASS($1);}
+     | NUM B {is_byte($1); $$ = new NUMB($1);} 
+     | STRING {$$ = new STRING_CLASS($1);}
+     | TRUE {$$ = new BOOL_CLASS($1);}
+     | FALSE {$$ = new BOOL_CLASS($1);}
+     | NOT Exp {Node *node = is_bool($2); $$ = (node->value == "true") ? new BOOL_CLASS("false") : new BOOL_CLASS("true");}
+     | Exp AND Exp {Node *node1 = is_bool($1); Node *node2 = is_bool($3); $$ = (node1->value == "false" || node2->value == "false") ? new BOOL_CLASS("false") : new BOOL_CLASS("true");}
+     | Exp OR Exp {Node *node1 = is_bool($1); Node *node2 = is_bool($3); $$ = (node1->value == "false" && node2->value == "false") ? new BOOL_CLASS("false") : new BOOL_CLASS("true");}
+     | Exp BLE Exp {is_num($1); is_num($3); $$ = calc_relop($1, $2, $3) ? new BOOL_CLASS("true") : new BOOL_CLASS("false");}
+     | Exp EQU Exp {is_num($1); is_num($3); $$ = calc_relop($1, $2, $3) ? new BOOL_CLASS("true") : new BOOL_CLASS("false");}
+     | LPAREN Type RPAREN Exp {Node* node = try_number_cast_type($2, $4); if (node->type=="INT")
+     {
+        $$ = new NUM_CLASS(node);
+     }
+     else{
+        $$ = new NUMB(node);
+     }}
+
+CHECK_EXP : Exp {$$ = is_bool($1);}
+OPEN_SCOPE : {add_scope();}
+CLOSE_SCOPE : {remove_scope();}
+
+%%
+
+
+int main () {
+    trex = new Trex();
+    codegen_chan = new codeGen_chan();
+    codegen_chan->emit_globals();
+    code_gen->emit_open_main_chan();
+    int rc = yyparse();
+    trex->remove_scope();
+    return rc;
+}
+
+void yyerror(const char *err_msg){
+	output::errorSyn(yylineno);
+	exit(0);
+}
