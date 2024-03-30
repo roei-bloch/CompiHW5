@@ -33,7 +33,7 @@ public:
 
 Node* is_bool(Node* node);
 void is_num(Node* node);
-bool calc_relop(Node* left, Node* op, Node* right);
+BOOL_CLASS *calc_relop(Node* left, Node* op, Node* right);
 bool cast_type(Node* node1, Node* node2);
 void is_byte(Node* node);
 

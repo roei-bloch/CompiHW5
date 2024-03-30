@@ -37,7 +37,7 @@ void codeGen_chan::emit_globals()
     code_buffer.emitGlobal("    ret void");
     code_buffer.emitGlobal("}");
     code_buffer.emitGlobal("define void @validatedevision(i32) {");
-    code_buffer.emitGlobal("    %cond = icmp eq %0, 0");
+    code_buffer.emitGlobal("    %cond = icmp i32 eq %0, 0");
     code_buffer.emitGlobal("    br i1 %cond, label %Invalid_div, label %Valid_div");
     code_buffer.emitGlobal("Invalid_div:");
     code_buffer.emitGlobal("    %msg_ptr = getelementptr [23 x i8], [23 x i8]* @.invalid_div_msg, i32 0, i32 0");
@@ -57,9 +57,6 @@ string codeGen_chan::allocate_reg(){
 }
 
 
-void codeGen_chan::gen_binop(EXP *result, EXP *left, string op, EXP *right){
-    
-}
 
 void codeGen_chan::emit_open_main_chan()
 {
@@ -73,4 +70,72 @@ void codeGen_chan::clean_offset(int offset)
     string reg = allocate_reg();
     code_buffer.emit(reg + " = getelementptr i32, i32* %frame_chan, i32 " + std::to_string(offset));
     code_buffer.emit("store i32 0, i32* " + reg);
+}
+
+
+
+void codeGen_chan::gen_binop(EXP *result, EXP *left, string op_str, EXP *right){
+    string llvm_op;
+    if(op_str == "/"){
+        code_buffer.emit("call void @validatedevision(i32 " + right->reg + ")");
+        if(result->type == "INT"){
+            llvm_op = "sdiv";
+        } else {
+            llvm_op = "udiv";
+        }
+    } else if(op_str == "*"){
+        llvm_op = "mul";
+    } else if(op_str == "+"){
+        llvm_op = "add";
+    } else {
+        llvm_op = "sub";
+    }
+    result->reg = allocate_reg();
+    code_buffer.emit(result->reg + " = " + llvm_op + " i32 " + left->reg + ", " + right->reg);
+    if(result->type == "BYTE"){
+        string new_reg = allocate_reg();
+        code_buffer.emit(new_reg + " = and i32 255, " + result->reg);
+        result->reg = new_reg;
+    }
+}
+
+
+void codeGen_chan::gen_relop(EXP *result, EXP *left, string op_str, EXP *right){
+    string llvm_op;
+    if (op_str == "!=") {
+        llvm_op = "ne";
+    } else if (op_str == "==") {
+        llvm_op = "eq";
+    } else if (op_str == "<") {
+        llvm_op = "slt";
+    } else if(op_str == "<="){
+        llvm_op = "sle";
+    } else if (op_str == ">") {
+        llvm_op = "sgt";
+    } else {
+        llvm_op = "sge";
+    }
+
+    result->reg = allocate_reg();
+    code_buffer.emit(result->reg + " = icmp " + llvm_op + " i32 " + left->reg + ", " + right->reg);
+}
+
+
+void codeGen_chan::load_from_stack(Node* id_node, int offset){
+    string ptr_reg = allocate_reg();
+    id_node->reg = allocate_reg();
+    code_buffer.emit(ptr_reg + " = getelementptr i32, i32* %frame_chan, i32 " + std::to_string(offset));
+    code_buffer.emit(id_node->reg + " = load i32, i32* " + ptr_reg);
+}
+
+void codeGen_chan::assign_reg_for_literal(Node* num_node, string val){
+    num_node->reg = allocate_reg();
+    code_buffer.emit(num_node->reg + "add i32 0, " + val);
+}
+
+void codeGen_chan::store_to_stack(int offset, Node* assigned_node)
+{
+    string ptr_reg = allocate_reg();
+    code_buffer.emit(ptr_reg + " = getelementptr i32, i32* %frame_chan, i32 " + std::to_string(offset));
+    code_buffer.emit("store i32 " + assigned_node->reg + "i32* " + ptr_reg);
 }

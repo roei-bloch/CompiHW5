@@ -48,9 +48,11 @@ void is_num(Node* node)
     }
 }
 
-bool calc_relop(Node* left, Node* op, Node* right)
+BOOL_CLASS* calc_relop(Node* left, Node* op, Node* right)
 {
     int left_num, right_num;
+    BOOL_CLASS* res_node;
+    bool res;
     try{
         if (is_id(left))
         {
@@ -62,9 +64,11 @@ bool calc_relop(Node* left, Node* op, Node* right)
             }
             if (s->type != "INT")
             left_num = s->numerical_value;
+            codegen_chan->load_from_stack(left, s->offset);
         }
         else{
             left_num = std::stoi(left->value);
+            codegen_chan->assign_reg_for_literal(left, left->value);
         }
         if (is_id(right))
         {
@@ -75,28 +79,29 @@ bool calc_relop(Node* left, Node* op, Node* right)
                 exit(0);
             }
             left_num = s->numerical_value;
+            codegen_chan->load_from_stack(right, s->offset);
         }
         else {
             right_num = std::stoi(right->value);
+            codegen_chan->assign_reg_for_literal(right, right->value);
         }
-
         if (op->value == "<"){
-            return left_num < right_num;
-        } 
+            res = left_num < right_num;
+        }
         else if (op->value == ">"){
-            return left_num > right_num;
+            res =  left_num > right_num;
         } 
         else if (op->value == "<="){
-            return left_num <= right_num;
+            res = left_num <= right_num;
         }
         else if (op->value == ">="){
-            return left_num >= right_num;
+            res = left_num >= right_num;
         } 
         else if (op->value == "=="){
-            return left_num == right_num;
+            res = left_num == right_num;
         }
         else if (op->value == "!="){
-            return left_num != right_num;
+            res = left_num != right_num;
         }
         else{
             output::errorMismatch(yylineno);
@@ -110,6 +115,13 @@ bool calc_relop(Node* left, Node* op, Node* right)
         output::errorMismatch(yylineno);
         exit(0);
     }
+    if(res)
+        res_node = new BOOL_CLASS("true");
+    else
+        res_node = new BOOL_CLASS("false");
+
+    codegen_chan->gen_relop(res_node, left, op->value, right);
+    return res_node;
 }
 
 
@@ -284,6 +296,7 @@ void assign_symbol(Node* existing_symbol, Node* assigned_node)
             exit(0);
         } else{
             assigned_node_numerical_value = assigned_s->numerical_value;
+            codegen_chan->load_from_stack(assigned_node, assigned_s->offset);
         }
     } else {
         try
@@ -342,6 +355,7 @@ Node* plus_minus_mult_divide(Node *left, Node* op, Node *right)
             exit(0);
         }
         left_operand_numerical_val = left_s->numerical_value;
+        codegen_chan->load_from_stack(left, left_s->offset);
     } else {
         if(left->type == "INT" || left->type == "BYTE"){
             left_operand_numerical_val = std::stoi(left->value);
@@ -349,6 +363,7 @@ Node* plus_minus_mult_divide(Node *left, Node* op, Node *right)
             output::errorMismatch(yylineno);
             exit(0);
         }
+        codegen_chan->assign_reg_for_literal(left, left->value);
     }
 
     if(is_id_num(right)){
@@ -358,6 +373,7 @@ Node* plus_minus_mult_divide(Node *left, Node* op, Node *right)
             exit(0);
         }
         right_operand_numerical_val = right_s->numerical_value;
+        codegen_chan->load_from_stack(right, right_s->offset);
     } else {
         if(right->type == "INT" || right->type == "BYTE"){
             right_operand_numerical_val = std::stoi(right->value);
@@ -365,6 +381,7 @@ Node* plus_minus_mult_divide(Node *left, Node* op, Node *right)
             output::errorMismatch(yylineno);
             exit(0);
         }
+        codegen_chan->assign_reg_for_literal(right, right->value);
     }
     int result_numerical_value;
     if(op->value == "+"){
@@ -374,15 +391,16 @@ Node* plus_minus_mult_divide(Node *left, Node* op, Node *right)
     } else if(op->value == "*"){
         result_numerical_value = left_operand_numerical_val * right_operand_numerical_val;
     } else if(op->value == "/"){
-        codegen_chan->gen_binop();
-        result_numerical_value = left_operand_numerical_val / right_operand_numerical_val;
+        result_numerical_value = left_operand_numerical_val / 1;
     } else {
         assert(false);
     }
-
+    Node *result_node;
     if(right->type == "INT" || left->type == "INT"){
-        return new Node(std::to_string(result_numerical_value), "INT");
+        result_node = new Node(std::to_string(result_numerical_value), "INT");
     } else {
-        return new Node(std::to_string(result_numerical_value), "BYTE");
+        result_node = new Node(std::to_string(result_numerical_value), "BYTE");
     }
+    codegen_chan->gen_binop(result_node, left, op->value, right);
+    return result_node;
 }

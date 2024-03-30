@@ -104,8 +104,8 @@ Exp : LPAREN Exp RPAREN {$$ = $2;}
      | NOT Exp {Node *node = is_bool($2); $$ = (node->value == "true") ? new BOOL_CLASS("false") : new BOOL_CLASS("true");}
      | Exp AND Exp {Node *node1 = is_bool($1); Node *node2 = is_bool($3); $$ = (node1->value == "false" || node2->value == "false") ? new BOOL_CLASS("false") : new BOOL_CLASS("true");}
      | Exp OR Exp {Node *node1 = is_bool($1); Node *node2 = is_bool($3); $$ = (node1->value == "false" && node2->value == "false") ? new BOOL_CLASS("false") : new BOOL_CLASS("true");}
-     | Exp BLE Exp {is_num($1); is_num($3); $$ = calc_relop($1, $2, $3) ? new BOOL_CLASS("true") : new BOOL_CLASS("false");}
-     | Exp EQU Exp {is_num($1); is_num($3); $$ = calc_relop($1, $2, $3) ? new BOOL_CLASS("true") : new BOOL_CLASS("false");}
+     | Exp BLE Exp {is_num($1); is_num($3); $$ = calc_relop($1, $2, $3) ?}
+     | Exp EQU Exp {is_num($1); is_num($3); $$ = calc_relop($1, $2, $3) ?}
      | LPAREN Type RPAREN Exp {Node* node = try_number_cast_type($2, $4); if (node->type=="INT")
      {
         $$ = new NUM_CLASS(node);
@@ -135,3 +135,41 @@ void yyerror(const char *err_msg){
 	output::errorSyn(yylineno);
 	exit(0);
 }
+
+
+
+(a > b and b > c ) or e>f
+
+    %reg1 = icmp a>b
+    br i1 %reg1, label TRUE_COND, label FALSE_COND
+FALSE_COND#3:
+    br false_and_cond#3:
+True_label#3:
+    %reg2 = icmp b > c
+    br true_and_cond#3:
+## done a > b and b > c
+## if next is or:
+false_and_cond#3:
+    icmp e > f
+true_and_cond#3:
+i
+
+false_end_cond:
+    %res1 = false
+    br end_evalutation  
+true_end_cond:
+    %res2 = true
+end_evalutation:
+    %res = phi(res1, false_end_cond, res2, true_end_cond)
+
+BOOL_NODE
+end_label
+
+
+
+(a > b and b > c ) or e>f
+
+a > b
+false_label_a>b:
+b > c
+false_label_a>b:
