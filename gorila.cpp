@@ -38,13 +38,11 @@ Node* is_bool(Node* node)
         exit(0);
     }
     ret_node = new Node(bool_val, "BOOL", node->reg);
-    if(is_id(node)) {
-        s->copy_bool_atr(ret_node);
-    } else {
-        ret_node->false_label = node->false_label;
-        ret_node->true_label = node->true_label;
-        ret_node->tmp_code_buffer = node->tmp_code_buffer;
-    }
+    //////my change
+    ret_node->false_label = node->false_label;
+    ret_node->true_label = node->true_label;
+    ret_node->tmp_code_buffer = node->tmp_code_buffer;
+    ////////
 
     return ret_node;
 }
@@ -399,7 +397,10 @@ ID_CLASS* search_and_return_id(Node* node)
     ID_CLASS *ret_node = new ID_CLASS(node->value, s->type);
     codegen_chan->load_from_stack(ret_node, s->offset);
     if(s->type == "BOOL")
-        s->copy_bool_atr(ret_node);
+        ret_node->true_label = codegen_chan->code_buffer.freshLabel();
+        ret_node->false_label = codegen_chan->code_buffer.freshLabel();
+        ret_node->tmp_code_buffer = "br i1 " + ret_node->reg +  ", label %" + ret_node->true_label + ", label %" + ret_node->false_label + '\n';
+        // s->copy_bool_atr(ret_node);
     return ret_node;
 }
 
