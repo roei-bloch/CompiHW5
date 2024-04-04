@@ -315,6 +315,8 @@ void add_symbol(Node* type, Node* new_symbol, Node* assigned_node){
     Symbol *new_s = trex->search_symbol(new_symbol->value);
     if(assigned_node)
         codegen_chan->store_to_stack(new_s->offset, assigned_node);
+    else // not really bool but we need to assign zero for uninitalized vars
+        codegen_chan->store_bool_stack(new_s->offset, 0);
 }
 
 
@@ -365,9 +367,10 @@ void assign_symbol(Node* existing_symbol, Node* assigned_node)
                     codegen_chan->code_buffer.emit(assigned_node->tmp_code_buffer);
                     string end_label = codegen_chan->code_buffer.freshLabel();
                     codegen_chan->code_buffer.emit(assigned_node->true_label + ":");
-                    codegen_chan->store_bool_stack(s->offset, 0);
+                    codegen_chan->store_bool_stack(s->offset, 1);
                     codegen_chan->code_buffer.emit("br label %" + end_label);
                     codegen_chan->code_buffer.emit(assigned_node->false_label + ":");
+                    codegen_chan->store_bool_stack(s->offset, 0);
                     codegen_chan->code_buffer.emit("br label %" + end_label);
                     codegen_chan->code_buffer.emit(end_label + ":");
                     return;
@@ -553,12 +556,13 @@ BOOL_CLASS *evaluate_and_exp(Node* node1, Node *node2)
     return ret_node;
 }
 
-Node *evaluate_not_exp(Node *bool_exp)
+BOOL_CLASS *evaluate_not_exp(Node *bool_exp)
 {
-    string tmp = bool_exp->true_label;
-    bool_exp->true_label = bool_exp->false_label;
-    bool_exp->false_label = tmp;
-    return bool_exp;
+    BOOL_CLASS *ret_node = new BOOL_CLASS("true");
+    ret_node->true_label = bool_exp->false_label;
+    ret_node->false_label = bool_exp->true_label;
+    ret_node->tmp_code_buffer = bool_exp->tmp_code_buffer;
+    return ret_node;
 }
 
 STRING_CLASS *add_string_literal(Node *node)

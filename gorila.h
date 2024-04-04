@@ -105,7 +105,7 @@ NUMB *CREATE_EXP_OF_NUMB(Node * node);
 BOOL_CLASS *evaluate_and_exp(Node* node1, Node* node2);
 BOOL_CLASS *calc_relop(Node* left, Node* op, Node* right);
 BOOL_CLASS *create_bool_class_from_literal(string str);
-Node *evaluate_not_exp(Node *bool_exp);
+BOOL_CLASS *evaluate_not_exp(Node *bool_exp);
 BOOL_CLASS *evaluate_or_exp(Node* node1, Node *node2);
 STRING_CLASS *add_string_literal(Node *node);
 #endif /* GORILA_H */
