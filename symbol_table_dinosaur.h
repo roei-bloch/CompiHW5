@@ -14,11 +14,33 @@ extern codeGen_chan *codegen_chan;
 class Symbol{
 public:
     string name;
+    string true_label;
+    string false_label;
+    string tmp_code_buffer;
     int offset;
     string type;
     int numerical_value;
 
-    Symbol(string s_name, int s_offset, string s_type, int s_numerical_value = 1): name(s_name), offset(s_offset), type(s_type), numerical_value(s_numerical_value){} 
+    Symbol(string s_name, int s_offset, string s_type, int s_numerical_value = 1, string true_label = "default_true", string false_label = "default_fasle", string tmp_code_buffer = "default_tmp_code_buffer"):
+             name(s_name), offset(s_offset), type(s_type), numerical_value(s_numerical_value), true_label(true_label), false_label(false_label), tmp_code_buffer(tmp_code_buffer){}
+    void save_bool_atr(string tmp_code_buffer, string true_label, string false_label)
+    {
+        this->tmp_code_buffer = tmp_code_buffer;
+        this->true_label = true_label;
+        this->false_label = false_label;
+    }
+    void save_bool_atr(Symbol *s)
+    {
+        this->tmp_code_buffer = s->tmp_code_buffer;
+        this->true_label = s->true_label;
+        this->false_label = s->false_label;
+    }
+    void copy_bool_atr(Node* node)
+    {
+        node->tmp_code_buffer = this->tmp_code_buffer;
+        node->true_label = this->true_label;
+        node->false_label = this->false_label;
+    }
 };
 
 class Func{
@@ -94,19 +116,19 @@ public:
 
     void remove_scope()
     {
-        std::cout << "---end scope---" << std::endl;
+        scopes.back()->clear_scope_content();
+        // std::cout << "---end scope---" << std::endl;
         if(scopes.size() > 1){
-            scopes.back()->print_scope_content();
+            // scopes.back()->print_scope_content();
             scopes.pop_back();
         } else {
             for(int i = 0; i < NUM_OF_FUNCS; i++){
                 Func *func = funcs[i];
-                std::cout << func->name + " (" + func->argument_type + ")->" + func->output_type + " 0" << std::endl; 
+                // std::cout << func->name + " (" + func->argument_type + ")->" + func->output_type + " 0" << std::endl; 
             }
-            scopes.back()->print_scope_content();
+            // scopes.back()->print_scope_content();
             scopes.pop_back();
         }
-
     }
 
 
