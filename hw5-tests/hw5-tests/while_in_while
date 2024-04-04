@@ -1,0 +1,10 @@
+{
+    bool stop1 = false;
+    if (true){
+            stop1 = true;
+        } else {
+            if (stop1) {
+                print("METZAHKEKET");
+            }
+        }
+}

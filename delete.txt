@@ -1,0 +1,715 @@
+parser.ypp: warning: 1 reduce/reduce conflict [-Wconflicts-rr]
+parser.ypp: note: rerun with option '-Wcounterexamples' to generate conflict counterexamples
+parser.ypp:63.78-105: warning: rule useless in parser due to conflicts [-Wother]
+   63 | ...SE_SCOPE {codegen_chan->skip_else();} ELSE OPEN_SCOPE Statement {r...
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from codeGen_chan.h:6,
+                 from gorila.h:6,
+                 from scanner.lex:2:
+symbol_table_dinosaur.h:12:8: error: ‘codeGen_chan’ does not name a type
+   12 | extern codeGen_chan *codegen_chan;
+      |        ^~~~~~~~~~~~
+In file included from codeGen_chan.h:6,
+                 from gorila.h:6,
+                 from scanner.lex:2:
+symbol_table_dinosaur.h: In member function ‘void Scope::clear_scope_content()’:
+symbol_table_dinosaur.h:53:13: error: ‘codegen_chan’ was not declared in this scope
+   53 |             codegen_chan->clean_offset(s->offset);
+      |             ^~~~~~~~~~~~
+symbol_table_dinosaur.h: In member function ‘void Trex::add_symbol(std::string, std::string, int)’:
+symbol_table_dinosaur.h:141:9: error: ‘output’ has not been declared
+  141 |         output::errorDef(yylineno, name);
+      |         ^~~~~~
+In file included from gorila.h:6,
+                 from scanner.lex:2:
+codeGen_chan.h: At global scope:
+codeGen_chan.h:20:20: error: ‘EXP’ has not been declared
+   20 |     void gen_binop(EXP *result, EXP *left, string op_str, EXP *right);
+      |                    ^~~
+codeGen_chan.h:20:33: error: ‘EXP’ has not been declared
+   20 |     void gen_binop(EXP *result, EXP *left, string op_str, EXP *right);
+      |                                 ^~~
+codeGen_chan.h:20:59: error: ‘EXP’ has not been declared
+   20 |     void gen_binop(EXP *result, EXP *left, string op_str, EXP *right);
+      |                                                           ^~~
+codeGen_chan.h:21:22: error: ‘EXP’ has not been declared
+   21 |     string gen_relop(EXP *result, EXP *left, string op_str, EXP *right);
+      |                      ^~~
+codeGen_chan.h:21:35: error: ‘EXP’ has not been declared
+   21 |     string gen_relop(EXP *result, EXP *left, string op_str, EXP *right);
+      |                                   ^~~
+codeGen_chan.h:21:61: error: ‘EXP’ has not been declared
+   21 |     string gen_relop(EXP *result, EXP *left, string op_str, EXP *right);
+      |                                                             ^~~
+codeGen_chan.h:24:26: error: ‘Node’ has not been declared
+   24 |     void load_from_stack(Node* id_node,int offset);
+      |                          ^~~~
+codeGen_chan.h:25:33: error: ‘Node’ has not been declared
+   25 |     void assign_reg_for_literal(Node* num_node, string val);
+      |                                 ^~~~
+codeGen_chan.h:26:37: error: ‘Node’ has not been declared
+   26 |     void store_to_stack(int offset, Node *assigned_node);
+      |                                     ^~~~
+codeGen_chan.h:27:28: error: ‘Node’ has not been declared
+   27 |     void gen_call_function(Node *function, Node *argument, Node *ret_node);
+      |                            ^~~~
+codeGen_chan.h:27:44: error: ‘Node’ has not been declared
+   27 |     void gen_call_function(Node *function, Node *argument, Node *ret_node);
+      |                                            ^~~~
+codeGen_chan.h:27:60: error: ‘Node’ has not been declared
+   27 |     void gen_call_function(Node *function, Node *argument, Node *ret_node);
+      |                                                            ^~~~
+codeGen_chan.h:28:27: error: ‘Node’ has not been declared
+   28 |     void add_while_labels(Node* bool_exp);
+      |                           ^~~~
+codeGen_chan.h:29:24: error: ‘Node’ has not been declared
+   29 |     void add_if_labels(Node *bool_exp);
+      |                        ^~~~
+In file included from codeGen_chan.h:5,
+                 from codeGen_chan.cpp:1:
+gorila.h:11:8: error: ‘codeGen_chan’ does not name a type
+   11 | extern codeGen_chan *codegen_chan;
+      |        ^~~~~~~~~~~~
+In file included from codeGen_chan.h:6,
+                 from codeGen_chan.cpp:1:
+symbol_table_dinosaur.h:12:8: error: ‘codeGen_chan’ does not name a type
+   12 | extern codeGen_chan *codegen_chan;
+      |        ^~~~~~~~~~~~
+In file included from codeGen_chan.h:6,
+                 from codeGen_chan.cpp:1:
+symbol_table_dinosaur.h: In member function ‘void Scope::clear_scope_content()’:
+symbol_table_dinosaur.h:53:13: error: ‘codegen_chan’ was not declared in this scope
+   53 |             codegen_chan->clean_offset(s->offset);
+      |             ^~~~~~~~~~~~
+symbol_table_dinosaur.h: In member function ‘void Trex::add_symbol(std::string, std::string, int)’:
+symbol_table_dinosaur.h:141:9: error: ‘output’ has not been declared
+  141 |         output::errorDef(yylineno, name);
+      |         ^~~~~~
+In file included from codeGen_chan.h:6,
+                 from gorila.h:6,
+                 from gorila.cpp:2:
+symbol_table_dinosaur.h:12:8: error: ‘codeGen_chan’ does not name a type
+   12 | extern codeGen_chan *codegen_chan;
+      |        ^~~~~~~~~~~~
+In file included from codeGen_chan.h:6,
+                 from gorila.h:6,
+                 from gorila.cpp:2:
+symbol_table_dinosaur.h: In member function ‘void Scope::clear_scope_content()’:
+symbol_table_dinosaur.h:53:13: error: ‘codegen_chan’ was not declared in this scope
+   53 |             codegen_chan->clean_offset(s->offset);
+      |             ^~~~~~~~~~~~
+symbol_table_dinosaur.h: In member function ‘void Trex::add_symbol(std::string, std::string, int)’:
+symbol_table_dinosaur.h:141:9: error: ‘output’ has not been declared
+  141 |         output::errorDef(yylineno, name);
+      |         ^~~~~~
+symbol_table_dinosaur.h:141:26: error: ‘yylineno’ was not declared in this scope
+  141 |         output::errorDef(yylineno, name);
+      |                          ^~~~~~~~
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h: At global scope:
+codeGen_chan.h:20:20: error: ‘EXP’ has not been declared
+   20 |     void gen_binop(EXP *result, EXP *left, string op_str, EXP *right);
+      |                    ^~~
+codeGen_chan.h:20:33: error: ‘EXP’ has not been declared
+   20 |     void gen_binop(EXP *result, EXP *left, string op_str, EXP *right);
+      |                                 ^~~
+codeGen_chan.h:20:59: error: ‘EXP’ has not been declared
+   20 |     void gen_binop(EXP *result, EXP *left, string op_str, EXP *right);
+      |                                                           ^~~
+codeGen_chan.h:21:22: error: ‘EXP’ has not been declared
+   21 |     string gen_relop(EXP *result, EXP *left, string op_str, EXP *right);
+      |                      ^~~
+codeGen_chan.h:21:35: error: ‘EXP’ has not been declared
+   21 |     string gen_relop(EXP *result, EXP *left, string op_str, EXP *right);
+      |                                   ^~~
+codeGen_chan.h:21:61: error: ‘EXP’ has not been declared
+   21 |     string gen_relop(EXP *result, EXP *left, string op_str, EXP *right);
+      |                                                             ^~~
+codeGen_chan.h:24:26: error: ‘Node’ has not been declared
+   24 |     void load_from_stack(Node* id_node,int offset);
+      |                          ^~~~
+codeGen_chan.h:25:33: error: ‘Node’ has not been declared
+   25 |     void assign_reg_for_literal(Node* num_node, string val);
+      |                                 ^~~~
+codeGen_chan.h:26:37: error: ‘Node’ has not been declared
+   26 |     void store_to_stack(int offset, Node *assigned_node);
+      |                                     ^~~~
+codeGen_chan.h:27:28: error: ‘Node’ has not been declared
+   27 |     void gen_call_function(Node *function, Node *argument, Node *ret_node);
+      |                            ^~~~
+codeGen_chan.h:27:44: error: ‘Node’ has not been declared
+   27 |     void gen_call_function(Node *function, Node *argument, Node *ret_node);
+      |                                            ^~~~
+codeGen_chan.h:27:60: error: ‘Node’ has not been declared
+   27 |     void gen_call_function(Node *function, Node *argument, Node *ret_node);
+      |                                                            ^~~~
+codeGen_chan.h:28:27: error: ‘Node’ has not been declared
+   28 |     void add_while_labels(Node* bool_exp);
+      |                           ^~~~
+codeGen_chan.h:29:24: error: ‘Node’ has not been declared
+   29 |     void add_if_labels(Node *bool_exp);
+      |                        ^~~~
+gorila.cpp: In function ‘BOOL_CLASS* calc_relop(Node*, Node*, Node*)’:
+gorila.cpp:67:43: error: cannot convert ‘Node*’ to ‘int*’
+   67 |             codegen_chan->load_from_stack(left, s->offset);
+      |                                           ^~~~
+      |                                           |
+      |                                           Node*
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:24:32: note:   initializing argument 1 of ‘void codeGen_chan::load_from_stack(int*, int)’
+   24 |     void load_from_stack(Node* id_node,int offset);
+      |                          ~~~~~~^~~~~~~
+gorila.cpp:71:50: error: cannot convert ‘Node*’ to ‘int*’
+   71 |             codegen_chan->assign_reg_for_literal(left, left->value);
+      |                                                  ^~~~
+      |                                                  |
+      |                                                  Node*
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:25:39: note:   initializing argument 1 of ‘void codeGen_chan::assign_reg_for_literal(int*, std::string)’
+   25 |     void assign_reg_for_literal(Node* num_node, string val);
+      |                                 ~~~~~~^~~~~~~~
+gorila.cpp:82:43: error: cannot convert ‘Node*’ to ‘int*’
+   82 |             codegen_chan->load_from_stack(right, s->offset);
+      |                                           ^~~~~
+      |                                           |
+      |                                           Node*
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:24:32: note:   initializing argument 1 of ‘void codeGen_chan::load_from_stack(int*, int)’
+   24 |     void load_from_stack(Node* id_node,int offset);
+      |                          ~~~~~~^~~~~~~
+gorila.cpp:86:50: error: cannot convert ‘Node*’ to ‘int*’
+   86 |             codegen_chan->assign_reg_for_literal(right, right->value);
+      |                                                  ^~~~~
+      |                                                  |
+      |                                                  Node*
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:25:39: note:   initializing argument 1 of ‘void codeGen_chan::assign_reg_for_literal(int*, std::string)’
+   25 |     void assign_reg_for_literal(Node* num_node, string val);
+      |                                 ~~~~~~^~~~~~~~
+gorila.cpp:124:42: error: ‘CodeBuffer codeGen_chan::code_buffer’ is private within this context
+  124 |     ret_node->true_label = codegen_chan->code_buffer.freshLabel();
+      |                                          ^~~~~~~~~~~
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:16:16: note: declared private here
+   16 |     CodeBuffer code_buffer;
+      |                ^~~~~~~~~~~
+gorila.cpp:125:43: error: ‘CodeBuffer codeGen_chan::code_buffer’ is private within this context
+  125 |     ret_node->false_label = codegen_chan->code_buffer.freshLabel();
+      |                                           ^~~~~~~~~~~
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:16:16: note: declared private here
+   16 |     CodeBuffer code_buffer;
+      |                ^~~~~~~~~~~
+gorila.cpp:126:58: error: cannot convert ‘BOOL_CLASS*’ to ‘int*’
+  126 |     ret_node->tmp_code_buffer += codegen_chan->gen_relop(ret_node, left, op->value, right);
+      |                                                          ^~~~~~~~
+      |                                                          |
+      |                                                          BOOL_CLASS*
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:21:27: note:   initializing argument 1 of ‘std::string codeGen_chan::gen_relop(int*, int*, std::string, int*)’
+   21 |     string gen_relop(EXP *result, EXP *left, string op_str, EXP *right);
+      |                      ~~~~~^~~~~~
+gorila.cpp: In function ‘Node* call_function(Node*, Node*)’:
+gorila.cpp:218:39: error: cannot convert ‘Node*’ to ‘int*’
+  218 |         codegen_chan->load_from_stack(argument, s->offset);
+      |                                       ^~~~~~~~
+      |                                       |
+      |                                       Node*
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:24:32: note:   initializing argument 1 of ‘void codeGen_chan::load_from_stack(int*, int)’
+   24 |     void load_from_stack(Node* id_node,int offset);
+      |                          ~~~~~~^~~~~~~
+gorila.cpp:223:50: error: cannot convert ‘Node*’ to ‘int*’
+  223 |             codegen_chan->assign_reg_for_literal(argument, argument->value);
+      |                                                  ^~~~~~~~
+      |                                                  |
+      |                                                  Node*
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:25:39: note:   initializing argument 1 of ‘void codeGen_chan::assign_reg_for_literal(int*, std::string)’
+   25 |     void assign_reg_for_literal(Node* num_node, string val);
+      |                                 ~~~~~~^~~~~~~~
+gorila.cpp:226:37: error: cannot convert ‘Node*’ to ‘int*’
+  226 |     codegen_chan->gen_call_function(func, argument, ret_node);
+      |                                     ^~~~
+      |                                     |
+      |                                     Node*
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:27:34: note:   initializing argument 1 of ‘void codeGen_chan::gen_call_function(int*, int*, int*)’
+   27 |     void gen_call_function(Node *function, Node *argument, Node *ret_node);
+      |                            ~~~~~~^~~~~~~~
+gorila.cpp: In function ‘void add_symbol(Node*, Node*, Node*)’:
+gorila.cpp:264:47: error: cannot convert ‘Node*’ to ‘int*’
+  264 |                 codegen_chan->load_from_stack(assigned_node, s->offset);
+      |                                               ^~~~~~~~~~~~~
+      |                                               |
+      |                                               Node*
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:24:32: note:   initializing argument 1 of ‘void codeGen_chan::load_from_stack(int*, int)’
+   24 |     void load_from_stack(Node* id_node,int offset);
+      |                          ~~~~~~^~~~~~~
+gorila.cpp:279:54: error: cannot convert ‘Node*’ to ‘int*’
+  279 |                 codegen_chan->assign_reg_for_literal(assigned_node, str_val);
+      |                                                      ^~~~~~~~~~~~~
+      |                                                      |
+      |                                                      Node*
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:25:39: note:   initializing argument 1 of ‘void codeGen_chan::assign_reg_for_literal(int*, std::string)’
+   25 |     void assign_reg_for_literal(Node* num_node, string val);
+      |                                 ~~~~~~^~~~~~~~
+gorila.cpp:286:62: error: cannot convert ‘Node*’ to ‘int*’
+  286 |                         codegen_chan->assign_reg_for_literal(assigned_node, assigned_node->value);
+      |                                                              ^~~~~~~~~~~~~
+      |                                                              |
+      |                                                              Node*
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:25:39: note:   initializing argument 1 of ‘void codeGen_chan::assign_reg_for_literal(int*, std::string)’
+   25 |     void assign_reg_for_literal(Node* num_node, string val);
+      |                                 ~~~~~~^~~~~~~~
+gorila.cpp:301:49: error: cannot convert ‘Node*’ to ‘int*’
+  301 |         codegen_chan->store_to_stack(s->offset, assigned_node);
+      |                                                 ^~~~~~~~~~~~~
+      |                                                 |
+      |                                                 Node*
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:26:43: note:   initializing argument 2 of ‘void codeGen_chan::store_to_stack(int, int*)’
+   26 |     void store_to_stack(int offset, Node *assigned_node);
+      |                                     ~~~~~~^~~~~~~~~~~~~
+gorila.cpp: In function ‘void assign_symbol(Node*, Node*)’:
+gorila.cpp:334:43: error: cannot convert ‘Node*’ to ‘int*’
+  334 |             codegen_chan->load_from_stack(assigned_node, assigned_s->offset);
+      |                                           ^~~~~~~~~~~~~
+      |                                           |
+      |                                           Node*
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:24:32: note:   initializing argument 1 of ‘void codeGen_chan::load_from_stack(int*, int)’
+   24 |     void load_from_stack(Node* id_node,int offset);
+      |                          ~~~~~~^~~~~~~
+gorila.cpp:344:54: error: cannot convert ‘Node*’ to ‘int*’
+  344 |                 codegen_chan->assign_reg_for_literal(assigned_node, str_val);
+      |                                                      ^~~~~~~~~~~~~
+      |                                                      |
+      |                                                      Node*
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:25:39: note:   initializing argument 1 of ‘void codeGen_chan::assign_reg_for_literal(int*, std::string)’
+   25 |     void assign_reg_for_literal(Node* num_node, string val);
+      |                                 ~~~~~~^~~~~~~~
+gorila.cpp:350:58: error: cannot convert ‘Node*’ to ‘int*’
+  350 |                     codegen_chan->assign_reg_for_literal(assigned_node, assigned_node->value);
+      |                                                          ^~~~~~~~~~~~~
+      |                                                          |
+      |                                                          Node*
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:25:39: note:   initializing argument 1 of ‘void codeGen_chan::assign_reg_for_literal(int*, std::string)’
+   25 |     void assign_reg_for_literal(Node* num_node, string val);
+      |                                 ~~~~~~^~~~~~~~
+gorila.cpp:359:45: error: cannot convert ‘Node*’ to ‘int*’
+  359 |     codegen_chan->store_to_stack(s->offset, assigned_node);
+      |                                             ^~~~~~~~~~~~~
+      |                                             |
+      |                                             Node*
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:26:43: note:   initializing argument 2 of ‘void codeGen_chan::store_to_stack(int, int*)’
+   26 |     void store_to_stack(int offset, Node *assigned_node);
+      |                                     ~~~~~~^~~~~~~~~~~~~
+gorila.cpp: In function ‘ID_CLASS* search_and_return_id(Node*)’:
+gorila.cpp:387:35: error: cannot convert ‘ID_CLASS*’ to ‘int*’
+  387 |     codegen_chan->load_from_stack(ret_node, s->offset);
+      |                                   ^~~~~~~~
+      |                                   |
+      |                                   ID_CLASS*
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:24:32: note:   initializing argument 1 of ‘void codeGen_chan::load_from_stack(int*, int)’
+   24 |     void load_from_stack(Node* id_node,int offset);
+      |                          ~~~~~~^~~~~~~
+gorila.cpp: In function ‘Node* plus_minus_mult_divide(Node*, Node*, Node*)’:
+gorila.cpp:402:39: error: cannot convert ‘Node*’ to ‘int*’
+  402 |         codegen_chan->load_from_stack(left, left_s->offset);
+      |                                       ^~~~
+      |                                       |
+      |                                       Node*
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:24:32: note:   initializing argument 1 of ‘void codeGen_chan::load_from_stack(int*, int)’
+   24 |     void load_from_stack(Node* id_node,int offset);
+      |                          ~~~~~~^~~~~~~
+gorila.cpp:410:46: error: cannot convert ‘Node*’ to ‘int*’
+  410 |         codegen_chan->assign_reg_for_literal(left, left->value);
+      |                                              ^~~~
+      |                                              |
+      |                                              Node*
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:25:39: note:   initializing argument 1 of ‘void codeGen_chan::assign_reg_for_literal(int*, std::string)’
+   25 |     void assign_reg_for_literal(Node* num_node, string val);
+      |                                 ~~~~~~^~~~~~~~
+gorila.cpp:420:39: error: cannot convert ‘Node*’ to ‘int*’
+  420 |         codegen_chan->load_from_stack(right, right_s->offset);
+      |                                       ^~~~~
+      |                                       |
+      |                                       Node*
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:24:32: note:   initializing argument 1 of ‘void codeGen_chan::load_from_stack(int*, int)’
+   24 |     void load_from_stack(Node* id_node,int offset);
+      |                          ~~~~~~^~~~~~~
+gorila.cpp:428:46: error: cannot convert ‘Node*’ to ‘int*’
+  428 |         codegen_chan->assign_reg_for_literal(right, right->value);
+      |                                              ^~~~~
+      |                                              |
+      |                                              Node*
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:25:39: note:   initializing argument 1 of ‘void codeGen_chan::assign_reg_for_literal(int*, std::string)’
+   25 |     void assign_reg_for_literal(Node* num_node, string val);
+      |                                 ~~~~~~^~~~~~~~
+gorila.cpp:448:29: error: cannot convert ‘Node*’ to ‘int*’
+  448 |     codegen_chan->gen_binop(result_node, left, op->value, right);
+      |                             ^~~~~~~~~~~
+      |                             |
+      |                             Node*
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:20:25: note:   initializing argument 1 of ‘void codeGen_chan::gen_binop(int*, int*, std::string, int*)’
+   20 |     void gen_binop(EXP *result, EXP *left, string op_str, EXP *right);
+      |                    ~~~~~^~~~~~
+gorila.cpp: In function ‘NUMB* CREATE_EXP_OF_NUMB(Node*)’:
+gorila.cpp:455:42: error: cannot convert ‘NUMB*’ to ‘int*’
+  455 |     codegen_chan->assign_reg_for_literal(ret_node, ret_node->value);
+      |                                          ^~~~~~~~
+      |                                          |
+      |                                          NUMB*
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:25:39: note:   initializing argument 1 of ‘void codeGen_chan::assign_reg_for_literal(int*, std::string)’
+   25 |     void assign_reg_for_literal(Node* num_node, string val);
+      |                                 ~~~~~~^~~~~~~~
+gorila.cpp: At global scope:
+gorila.cpp:461:1: error: expected unqualified-id before ‘{’ token
+  461 | {
+      | ^
+gorila.cpp: In function ‘BOOL_CLASS* evaluate_and_exp(Node*, Node*)’:
+gorila.cpp:470:15: error: ‘class BOOL_CLASS’ has no member named ‘continue_label’; did you mean ‘true_label’?
+  470 |     ret_node->continue_label = codegen_chan->code_buffer.freshLabel();
+      |               ^~~~~~~~~~~~~~
+      |               true_label
+gorila.cpp:470:46: error: ‘CodeBuffer codeGen_chan::code_buffer’ is private within this context
+  470 |     ret_node->continue_label = codegen_chan->code_buffer.freshLabel();
+      |                                              ^~~~~~~~~~~
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:16:16: note: declared private here
+   16 |     CodeBuffer code_buffer;
+      |                ^~~~~~~~~~~
+gorila.cpp:471:15: error: ‘class BOOL_CLASS’ has no member named ‘continue_buffer’
+  471 |     ret_node->continue_buffer = ret_node->continue_label + ":" + '\n';
+      |               ^~~~~~~~~~~~~~~
+gorila.cpp:471:43: error: ‘class BOOL_CLASS’ has no member named ‘continue_label’; did you mean ‘true_label’?
+  471 |     ret_node->continue_buffer = ret_node->continue_label + ":" + '\n';
+      |                                           ^~~~~~~~~~~~~~
+      |                                           true_label
+gorila.cpp:472:43: error: ‘CodeBuffer codeGen_chan::code_buffer’ is private within this context
+  472 |     ret_node->false_label = codegen_chan->code_buffer.freshLabel();
+      |                                           ^~~~~~~~~~~
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:16:16: note: declared private here
+   16 |     CodeBuffer code_buffer;
+      |                ^~~~~~~~~~~
+gorila.cpp:473:15: error: ‘class BOOL_CLASS’ has no member named ‘false_buffer’
+  473 |     ret_node->false_buffer = ret_node->false_label + ":" + '\n';
+      |               ^~~~~~~~~~~~
+gorila.cpp:474:42: error: ‘CodeBuffer codeGen_chan::code_buffer’ is private within this context
+  474 |     ret_node->true_label = codegen_chan->code_buffer.freshLabel();
+      |                                          ^~~~~~~~~~~
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:16:16: note: declared private here
+   16 |     CodeBuffer code_buffer;
+      |                ^~~~~~~~~~~
+gorila.cpp:475:15: error: ‘class BOOL_CLASS’ has no member named ‘true_buffer’
+  475 |     ret_node->true_buffer = ret_node->true_label + ":" + '\n';
+      |               ^~~~~~~~~~~
+gorila.cpp:478:23: error: ‘class codeGen_chan’ has no member named ‘check_first_bool_reg_and_exp’
+  478 |         codegen_chan->check_first_bool_reg_and_exp(node1->reg, ret_node->start_buffer, ret_node->continue_label, ret_node->false_label);
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+gorila.cpp:478:74: error: ‘class BOOL_CLASS’ has no member named ‘start_buffer’
+  478 |         codegen_chan->check_first_bool_reg_and_exp(node1->reg, ret_node->start_buffer, ret_node->continue_label, ret_node->false_label);
+      |                                                                          ^~~~~~~~~~~~
+gorila.cpp:478:98: error: ‘class BOOL_CLASS’ has no member named ‘continue_label’; did you mean ‘true_label’?
+  478 |         codegen_chan->check_first_bool_reg_and_exp(node1->reg, ret_node->start_buffer, ret_node->continue_label, ret_node->false_label);
+      |                                                                                                  ^~~~~~~~~~~~~~
+      |                                                                                                  true_label
+gorila.cpp:480:23: error: ‘class codeGen_chan’ has no member named ‘add_and_exp_br_first_exp’
+  480 |         codegen_chan->add_and_exp_br_first_exp(node1->true_buffer, node1->false_buffer, ret_node->continue_label, ret_node->false_label);
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~
+gorila.cpp:480:55: error: ‘class Node’ has no member named ‘true_buffer’
+  480 |         codegen_chan->add_and_exp_br_first_exp(node1->true_buffer, node1->false_buffer, ret_node->continue_label, ret_node->false_label);
+      |                                                       ^~~~~~~~~~~
+gorila.cpp:480:75: error: ‘class Node’ has no member named ‘false_buffer’
+  480 |         codegen_chan->add_and_exp_br_first_exp(node1->true_buffer, node1->false_buffer, ret_node->continue_label, ret_node->false_label);
+      |                                                                           ^~~~~~~~~~~~
+gorila.cpp:480:99: error: ‘class BOOL_CLASS’ has no member named ‘continue_label’; did you mean ‘true_label’?
+  480 |         codegen_chan->add_and_exp_br_first_exp(node1->true_buffer, node1->false_buffer, ret_node->continue_label, ret_node->false_label);
+      |                                                                                                   ^~~~~~~~~~~~~~
+      |                                                                                                   true_label
+gorila.cpp:484:23: error: ‘class codeGen_chan’ has no member named ‘check_second_bool_reg_and_exp’
+  484 |         codegen_chan->check_second_bool_reg_and_exp(node2->reg, ret_node->continue_buffer, ret_node->true_label, ret_node->false_label);
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+gorila.cpp:484:75: error: ‘class BOOL_CLASS’ has no member named ‘continue_buffer’
+  484 |         codegen_chan->check_second_bool_reg_and_exp(node2->reg, ret_node->continue_buffer, ret_node->true_label, ret_node->false_label);
+      |                                                                           ^~~~~~~~~~~~~~~
+gorila.cpp:486:23: error: ‘class codeGen_chan’ has no member named ‘add_sub_expression_code_in_continue’
+  486 |         codegen_chan->add_sub_expression_code_in_continue(node2->true_buffer, node2->false_buffer, ret_node->true_label, ret_node->false_label);
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+gorila.cpp:486:66: error: ‘class Node’ has no member named ‘true_buffer’
+  486 |         codegen_chan->add_sub_expression_code_in_continue(node2->true_buffer, node2->false_buffer, ret_node->true_label, ret_node->false_label);
+      |                                                                  ^~~~~~~~~~~
+gorila.cpp:486:86: error: ‘class Node’ has no member named ‘false_buffer’
+  486 |         codegen_chan->add_sub_expression_code_in_continue(node2->true_buffer, node2->false_buffer, ret_node->true_label, ret_node->false_label);
+      |                                                                                      ^~~~~~~~~~~~
+gorila.cpp:488:1: warning: no return statement in function returning non-void [-Wreturn-type]
+  488 | }
+      | ^
+gorila.cpp: In function ‘BOOL_CLASS* create_bool_class_from_literal(std::string)’:
+gorila.cpp:494:42: error: ‘CodeBuffer codeGen_chan::code_buffer’ is private within this context
+  494 |     ret_node->true_label = codegen_chan->code_buffer.freshLabel();
+      |                                          ^~~~~~~~~~~
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:16:16: note: declared private here
+   16 |     CodeBuffer code_buffer;
+      |                ^~~~~~~~~~~
+gorila.cpp:495:43: error: ‘CodeBuffer codeGen_chan::code_buffer’ is private within this context
+  495 |     ret_node->false_label = codegen_chan->code_buffer.freshLabel();
+      |                                           ^~~~~~~~~~~
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:16:16: note: declared private here
+   16 |     CodeBuffer code_buffer;
+      |                ^~~~~~~~~~~
+gorila.cpp:496:42: error: cannot convert ‘BOOL_CLASS*’ to ‘int*’
+  496 |     codegen_chan->assign_reg_for_literal(ret_node, reg_val);
+      |                                          ^~~~~~~~
+      |                                          |
+      |                                          BOOL_CLASS*
+In file included from gorila.h:6,
+                 from gorila.cpp:2:
+codeGen_chan.h:25:39: note:   initializing argument 1 of ‘void codeGen_chan::assign_reg_for_literal(int*, std::string)’
+   25 |     void assign_reg_for_literal(Node* num_node, string val);
+      |                                 ~~~~~~^~~~~~~~
+gorila.cpp:498:1: warning: no return statement in function returning non-void [-Wreturn-type]
+  498 | }
+      | ^
+In file included from codeGen_chan.h:6,
+                 from gorila.h:6,
+                 from parser.ypp:3:
+symbol_table_dinosaur.h:12:8: error: ‘codeGen_chan’ does not name a type
+   12 | extern codeGen_chan *codegen_chan;
+      |        ^~~~~~~~~~~~
+In file included from codeGen_chan.h:6,
+                 from gorila.h:6,
+                 from parser.ypp:3:
+symbol_table_dinosaur.h: In member function ‘void Scope::clear_scope_content()’:
+symbol_table_dinosaur.h:53:13: error: ‘codegen_chan’ was not declared in this scope
+   53 |             codegen_chan->clean_offset(s->offset);
+      |             ^~~~~~~~~~~~
+symbol_table_dinosaur.h: In member function ‘void Trex::add_symbol(std::string, std::string, int)’:
+symbol_table_dinosaur.h:141:26: error: ‘yylineno’ was not declared in this scope
+  141 |         output::errorDef(yylineno, name);
+      |                          ^~~~~~~~
+In file included from gorila.h:6,
+                 from parser.ypp:3:
+codeGen_chan.h: At global scope:
+codeGen_chan.h:20:20: error: ‘EXP’ has not been declared
+   20 |     void gen_binop(EXP *result, EXP *left, string op_str, EXP *right);
+      |                    ^~~
+codeGen_chan.h:20:33: error: ‘EXP’ has not been declared
+   20 |     void gen_binop(EXP *result, EXP *left, string op_str, EXP *right);
+      |                                 ^~~
+codeGen_chan.h:20:59: error: ‘EXP’ has not been declared
+   20 |     void gen_binop(EXP *result, EXP *left, string op_str, EXP *right);
+      |                                                           ^~~
+codeGen_chan.h:21:22: error: ‘EXP’ has not been declared
+   21 |     string gen_relop(EXP *result, EXP *left, string op_str, EXP *right);
+      |                      ^~~
+codeGen_chan.h:21:35: error: ‘EXP’ has not been declared
+   21 |     string gen_relop(EXP *result, EXP *left, string op_str, EXP *right);
+      |                                   ^~~
+codeGen_chan.h:21:61: error: ‘EXP’ has not been declared
+   21 |     string gen_relop(EXP *result, EXP *left, string op_str, EXP *right);
+      |                                                             ^~~
+codeGen_chan.h:24:26: error: ‘Node’ has not been declared
+   24 |     void load_from_stack(Node* id_node,int offset);
+      |                          ^~~~
+codeGen_chan.h:25:33: error: ‘Node’ has not been declared
+   25 |     void assign_reg_for_literal(Node* num_node, string val);
+      |                                 ^~~~
+codeGen_chan.h:26:37: error: ‘Node’ has not been declared
+   26 |     void store_to_stack(int offset, Node *assigned_node);
+      |                                     ^~~~
+codeGen_chan.h:27:28: error: ‘Node’ has not been declared
+   27 |     void gen_call_function(Node *function, Node *argument, Node *ret_node);
+      |                            ^~~~
+codeGen_chan.h:27:44: error: ‘Node’ has not been declared
+   27 |     void gen_call_function(Node *function, Node *argument, Node *ret_node);
+      |                                            ^~~~
+codeGen_chan.h:27:60: error: ‘Node’ has not been declared
+   27 |     void gen_call_function(Node *function, Node *argument, Node *ret_node);
+      |                                                            ^~~~
+codeGen_chan.h:28:27: error: ‘Node’ has not been declared
+   28 |     void add_while_labels(Node* bool_exp);
+      |                           ^~~~
+codeGen_chan.h:29:24: error: ‘Node’ has not been declared
+   29 |     void add_if_labels(Node *bool_exp);
+      |                        ^~~~
+parser.ypp: In function ‘int yyparse()’:
+parser.ypp:61:50: error: ‘void codeGen_chan::add_return()’ is private within this context
+   61 |             | RETURN SC {codegen_chan->add_return();}
+      |                          ~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from gorila.h:6,
+                 from parser.ypp:3:
+codeGen_chan.h:37:10: note: declared private here
+   37 |     void add_return();
+      |          ^~~~~~~~~~
+parser.ypp:62:107: error: ‘void codeGen_chan::end_if_actions()’ is private within this context
+   62 |             | IF LPAREN CHECK_IF_EXP RPAREN OPEN_SCOPE Statement CLOSE_SCOPE {codegen_chan->end_if_actions();}
+      |                                                                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from gorila.h:6,
+                 from parser.ypp:3:
+codeGen_chan.h:33:10: note: declared private here
+   33 |     void end_if_actions();
+      |          ^~~~~~~~~~~~~~
+parser.ypp:63:102: error: ‘void codeGen_chan::skip_else()’ is private within this context
+   63 |             | IF LPAREN CHECK_IF_EXP RPAREN OPEN_SCOPE Statement CLOSE_SCOPE {codegen_chan->skip_else();} ELSE OPEN_SCOPE Statement {remove_scope(); codegen_chan->end_else_actions();}
+      |                                                                               ~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from gorila.h:6,
+                 from parser.ypp:3:
+codeGen_chan.h:35:10: note: declared private here
+   35 |     void skip_else();
+      |          ^~~~~~~~~
+parser.ypp:63:180: error: ‘void codeGen_chan::end_else_actions()’ is private within this context
+   63 |             | IF LPAREN CHECK_IF_EXP RPAREN OPEN_SCOPE Statement CLOSE_SCOPE {codegen_chan->skip_else();} ELSE OPEN_SCOPE Statement {remove_scope(); codegen_chan->end_else_actions();}
+      |                                                                                                                                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from gorila.h:6,
+                 from parser.ypp:3:
+codeGen_chan.h:36:10: note: declared private here
+   36 |     void end_else_actions();
+      |          ^~~~~~~~~~~~~~~~
+parser.ypp:64:162: error: ‘void codeGen_chan::end_while_actions()’ is private within this context
+   64 |             | WHILE LPAREN CHECK_WHILE_EXP RPAREN OPEN_SCOPE {global_while_ctr++;} Statement {global_while_ctr--; remove_scope(); codegen_chan->end_while_actions();}
+      |                                                                                                                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from gorila.h:6,
+                 from parser.ypp:3:
+codeGen_chan.h:32:10: note: declared private here
+   32 |     void end_while_actions();
+      |          ^~~~~~~~~~~~~~~~~
+parser.ypp:70:48: error: ‘void codeGen_chan::add_break()’ is private within this context
+   70 |                         codegen_chan->add_break();}
+      |                         ~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from gorila.h:6,
+                 from parser.ypp:3:
+codeGen_chan.h:30:10: note: declared private here
+   30 |     void add_break();
+      |          ^~~~~~~~~
+parser.ypp:76:55: error: ‘void codeGen_chan::add_continue()’ is private within this context
+   76 |                             codegen_chan->add_continue();}
+      |                             ~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from gorila.h:6,
+                 from parser.ypp:3:
+codeGen_chan.h:31:10: note: declared private here
+   31 |     void add_continue();
+      |          ^~~~~~~~~~~~
+parser.ypp:108:67: error: ‘evaluate_or_exp’ was not declared in this scope; did you mean ‘evaluate_not_exp’?
+  108 |      | Exp OR Exp {is_bool($1); is_bool($3); $$ = evaluate_or_exp($1, $3);}
+      |                                                                   ^~~~~~~~~      
+      |                                                                   evaluate_not_exp
+parser.ypp:119:62: error: cannot convert ‘Node*’ to ‘int*’
+  119 | CHECK_WHILE_EXP : Exp {codegen_chan->add_while_labels($1); $$ = is_bool($1);}
+      |                                                       ~~~~~~~^
+      |                                                              |
+      |                                                              Node*
+In file included from gorila.h:6,
+                 from parser.ypp:3:
+codeGen_chan.h:28:33: note:   initializing argument 1 of ‘void codeGen_chan::add_while_labels(int*)’
+   28 |     void add_while_labels(Node* bool_exp);
+      |                           ~~~~~~^~~~~~~~
+parser.ypp:120:56: error: cannot convert ‘Node*’ to ‘int*’
+  120 | CHECK_IF_EXP : Exp {codegen_chan->add_if_labels($1); $$ = is_bool($1);}
+      |                                                 ~~~~~~~^
+      |                                                        |
+      |                                                        Node*
+In file included from gorila.h:6,
+                 from parser.ypp:3:
+codeGen_chan.h:29:30: note:   initializing argument 1 of ‘void codeGen_chan::add_if_labels(int*)’
+   29 |     void add_if_labels(Node *bool_exp);
+      |                        ~~~~~~^~~~~~~~
+parser.ypp: In function ‘int main()’:
+parser.ypp:129:37: error: ‘codeGen_chan::codeGen_chan()’ is private within this context
+  129 |     codegen_chan = new codeGen_chan();
+      |                                     ^
+In file included from gorila.h:6,
+                 from parser.ypp:3:
+codeGen_chan.h:17:5: note: declared private here
+   17 |     codeGen_chan();
+      |     ^~~~~~~~~~~~
+parser.ypp:130:31: error: ‘void codeGen_chan::emit_globals()’ is private within this context
+  130 |     codegen_chan->emit_globals();
+      |     ~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from gorila.h:6,
+                 from parser.ypp:3:
+codeGen_chan.h:18:10: note: declared private here
+   18 |     void emit_globals();
+      |          ^~~~~~~~~~~~
+parser.ypp:131:38: error: ‘void codeGen_chan::emit_open_main_chan()’ is private within this context
+  131 |     codegen_chan->emit_open_main_chan();
+      |     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from gorila.h:6,
+                 from parser.ypp:3:
+codeGen_chan.h:22:10: note: declared private here
+   22 |     void emit_open_main_chan();
+      |          ^~~~~~~~~~~~~~~~~~~
+parser.ypp:134:36: error: ‘void codeGen_chan::add_closing_scope()’ is private within this context
+  134 |     codegen_chan->add_closing_scope();
+      |     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from gorila.h:6,
+                 from parser.ypp:3:
+codeGen_chan.h:34:10: note: declared private here
+   34 |     void add_closing_scope();
+      |          ^~~~~~~~~~~~~~~~~
+parser.ypp:135:19: error: ‘CodeBuffer codeGen_chan::code_buffer’ is private within this context
+  135 |     codegen_chan->code_buffer.printGlobalBuffer();
+      |                   ^~~~~~~~~~~
+In file included from gorila.h:6,
+                 from parser.ypp:3:
+codeGen_chan.h:16:16: note: declared private here
+   16 |     CodeBuffer code_buffer;
+      |                ^~~~~~~~~~~
+parser.ypp:136:19: error: ‘CodeBuffer codeGen_chan::code_buffer’ is private within this context
+  136 |     codegen_chan->code_buffer.printCodeBuffer();
+      |                   ^~~~~~~~~~~
+In file included from gorila.h:6,
+                 from parser.ypp:3:
+codeGen_chan.h:16:16: note: declared private here
+   16 |     CodeBuffer code_buffer;
+      |                ^~~~~~~~~~~
+make: *** [makefile:4: all] Error 1
