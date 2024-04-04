@@ -101,7 +101,7 @@ void codeGen_chan::gen_binop(Node *result, Node *left, string op_str, Node *righ
 }
 
 
-string codeGen_chan::gen_relop(Node *result, Node *left, string op_str, Node *right){
+void codeGen_chan::gen_relop(Node *result, Node *left, string op_str, Node *right){
     string llvm_op;
     if (op_str == "!=") {
         llvm_op = "ne";
@@ -118,7 +118,7 @@ string codeGen_chan::gen_relop(Node *result, Node *left, string op_str, Node *ri
     }
 
     result->reg = allocate_reg();
-    return (result->reg + " = icmp " + llvm_op + " i32 " + left->reg + ", " + right->reg + '\n');
+    code_buffer.emit(result->reg + " = icmp " + llvm_op + " i32 " + left->reg + ", " + right->reg + '\n');
 }
 
 
@@ -156,7 +156,7 @@ void codeGen_chan::store_to_stack(int offset, Node* assigned_node)
         code_buffer.emit(zext_reg + " = zext i1 " + assigned_node->reg + " to i32");
         code_buffer.emit("store i32 " + zext_reg + ", i32* " + ptr_reg);
     } else {
-        code_buffer.emit("store i32 " + assigned_node->reg + ", i32* " + ptr_reg);\
+        code_buffer.emit("store i32 " + assigned_node->reg + ", i32* " + ptr_reg);
     }
 }
 
@@ -250,4 +250,9 @@ void codeGen_chan::add_global_string(Node *node)
     code_buffer.emit(node->reg + " = getelementptr [" + std::to_string(str_size) + " x i8], [" + std::to_string(str_size) + " x i8]* @.str" + std::to_string(str_index - 1) + ", i32 0, i32 0");
 }
 
-
+void codeGen_chan::store_bool_stack(int offset, int bool_value)
+{
+    string ptr_reg = allocate_reg();
+    code_buffer.emit(ptr_reg + " = getelementptr i32, i32* %frame_chan, i32 " + std::to_string(offset));
+    code_buffer.emit("store i32 " + std::to_string(bool_value) + ", i32* " + ptr_reg);
+}

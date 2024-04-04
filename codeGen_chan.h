@@ -20,7 +20,7 @@ public:
     void emit_globals();
     string allocate_reg();
     void gen_binop(Node *result, Node *left, string op_str, Node *right);
-    string gen_relop(Node *result, Node *left, string op_str, Node *right);
+    void gen_relop(Node *result, Node *left, string op_str, Node *right);
     void emit_open_main_chan();
     void clean_offset(int offset);
     void load_from_stack(Node* id_node,int offset);
@@ -40,6 +40,7 @@ public:
     void assign_reg_for_bool_literal(Node* num_node, string val);
     void add_global_string(Node* node);
     void pre_while();
+    void store_bool_stack(int offset, int bool_value);
     //void check_first_bool_reg_and_exp(string bool_reg, string start_buffer, string continue_label, string false_label);
     //void check_second_bool_reg_and_exp(string bool_reg, string continue_buffer, string true_label, string false_label);
     //void add_and_exp_br(string true_buffer, string false_buffer, string continue_label, string false_label);

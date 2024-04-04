@@ -130,7 +130,8 @@ BOOL_CLASS* calc_relop(Node* left, Node* op, Node* right)
 
     ret_node->true_label = codegen_chan->code_buffer.freshLabel();
     ret_node->false_label = codegen_chan->code_buffer.freshLabel();
-    ret_node->tmp_code_buffer = codegen_chan->gen_relop(ret_node, left, op->value, right);
+    //ret_node->tmp_code_buffer = codegen_chan->gen_relop(ret_node, left, op->value, right);
+    codegen_chan->gen_relop(ret_node, left, op->value, right);
     ret_node->tmp_code_buffer += "br i1 " + ret_node->reg +  ", label %" + ret_node->true_label + ", label %" + ret_node->false_label + '\n';
     return ret_node;
 }
@@ -279,6 +280,20 @@ void add_symbol(Node* type, Node* new_symbol, Node* assigned_node){
                 int val = assigned_node->value == "true" ? 1 : 0;
                 string str_val = assigned_node->value == "true" ? "1" : "0";
                 new_symbol_numerical_value = val;
+                if(assigned_node->reg == "") // in case it was assignment of this: a > b and c > d 
+                {
+                    codegen_chan->code_buffer.emit(assigned_node->tmp_code_buffer);
+                    string end_label = codegen_chan->code_buffer.freshLabel();
+                    codegen_chan->code_buffer.emit(assigned_node->true_label + ":");
+                    codegen_chan->store_bool_stack(s->offset, 0);
+                    codegen_chan->code_buffer.emit("br label %" + end_label);
+                    codegen_chan->code_buffer.emit(assigned_node->false_label + ":");
+                    codegen_chan->code_buffer.emit("br label %" + end_label);
+                    codegen_chan->code_buffer.emit(end_label + ":");
+                    trex->add_symbol(new_symbol->value, type->type, new_symbol_numerical_value);
+                    new_symbol->type = type->type;
+                    return;
+                }
             }
             else {
                 if (assigned_node->reg == "")
@@ -298,13 +313,6 @@ void add_symbol(Node* type, Node* new_symbol, Node* assigned_node){
     trex->add_symbol(new_symbol->value, type->type, new_symbol_numerical_value);
     new_symbol->type = type->type;
     Symbol *new_s = trex->search_symbol(new_symbol->value);
-    if(assigned_node && assigned_node->type == "BOOL")
-    {
-        if(is_assigned_node_id)
-            new_s->save_bool_atr(s);
-        else
-            new_s->save_bool_atr(assigned_node->tmp_code_buffer, assigned_node->true_label, assigned_node->false_label);        
-    }
     if(assigned_node)
         codegen_chan->store_to_stack(new_s->offset, assigned_node);
 }
@@ -352,6 +360,18 @@ void assign_symbol(Node* existing_symbol, Node* assigned_node)
                 int val = assigned_node->value == "true" ? 1 : 0;
                 string str_val = assigned_node->value == "true" ? "1" : "0";
                 assigned_node_numerical_value = val;
+                if(assigned_node->reg == "") // in case it was assignment of this: a > b and c > d 
+                {
+                    codegen_chan->code_buffer.emit(assigned_node->tmp_code_buffer);
+                    string end_label = codegen_chan->code_buffer.freshLabel();
+                    codegen_chan->code_buffer.emit(assigned_node->true_label + ":");
+                    codegen_chan->store_bool_stack(s->offset, 0);
+                    codegen_chan->code_buffer.emit("br label %" + end_label);
+                    codegen_chan->code_buffer.emit(assigned_node->false_label + ":");
+                    codegen_chan->code_buffer.emit("br label %" + end_label);
+                    codegen_chan->code_buffer.emit(end_label + ":");
+                    return;
+                }
                 s->save_bool_atr(assigned_node->tmp_code_buffer, assigned_node->true_label, assigned_node->false_label);
             }
             else{ //case byte or int or func
